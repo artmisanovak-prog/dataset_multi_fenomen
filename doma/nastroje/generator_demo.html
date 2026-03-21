@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo generátor · Chceš myš?</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg: #0f0d0a; --s: #171410; --s2: #1e1a14; --cream: #e8e0d0;
+            --dim: rgba(232,224,208,0.42); --dim2: rgba(232,224,208,0.2);
+            --accent: #a89880; --accent2: #786858;
+            --border: rgba(168,152,128,0.14); --border-hi: rgba(168,152,128,0.3);
+            --serif: 'Cormorant Garamond', Georgia, serif; --mono: 'DM Mono', monospace;
+        }
+        body {
+            background: var(--bg); color: var(--cream);
+            font-family: var(--mono); font-size: 13px; line-height: 1.8;
+            padding: 30px 20px;
+        }
+        a { color: inherit; text-decoration: none; }
+        .wrap { max-width: 1000px; margin: 0 auto; }
+
+        nav {
+            position: sticky; top: 0; z-index: 100;
+            border-bottom: 1px solid var(--border);
+            background: rgba(15,13,10,0.94); backdrop-filter: blur(14px);
+            padding: 11px 24px; display: flex; align-items: center;
+            justify-content: space-between; flex-wrap: wrap; gap: 10px;
+            margin-bottom: 30px;
+        }
+        .nav-brand { font-family: var(--serif); font-size: 0.88rem; font-weight: 300; }
+        .nav-brand em { font-style: italic; color: var(--accent); }
+        .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+        .nav-link {
+            font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--dim); padding: 4px 9px; border: 1px solid transparent;
+            transition: all 0.12s;
+        }
+        .nav-link:hover { color: var(--cream); border-color: var(--border); }
+
+        .selector-group {
+            display: flex; flex-wrap: wrap; gap: 30px; margin: 30px 0;
+            justify-content: center;
+        }
+        .selector {
+            flex: 1; min-width: 200px; background: var(--s);
+            border: 1px solid var(--border); padding: 20px;
+        }
+        .selector h3 { font-family: var(--serif); font-weight: 300; margin-bottom: 15px; font-size: 1.2rem; }
+        .selector select {
+            width: 100%; background: var(--s2); border: 1px solid var(--border);
+            color: var(--cream); padding: 8px; font-family: var(--mono);
+            margin-bottom: 15px;
+        }
+        .angle-buttons {
+            display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;
+        }
+        .angle-btn {
+            background: var(--s2); border: 1px solid var(--border);
+            color: var(--dim); padding: 4px 8px; font-size: 0.65rem;
+            cursor: pointer; transition: 0.1s;
+        }
+        .angle-btn.active { border-color: var(--accent); color: var(--accent); }
+        .animal-image {
+            text-align: center; margin-top: 15px;
+        }
+        .animal-image img {
+            width: 100px; height: 100px; object-fit: cover;
+            border: 1px solid var(--border); filter: grayscale(1);
+        }
+        .source-link {
+            text-align: center; margin-top: 8px; font-size: 0.7rem;
+        }
+        .source-link a {
+            color: var(--accent); text-decoration: underline;
+        }
+        .controls {
+            display: flex; flex-wrap: wrap; gap: 16px;
+            align-items: flex-end; justify-content: center; margin: 30px 0;
+        }
+        .ctrl-group { display: flex; flex-direction: column; gap: 4px; }
+        .ctrl-group label {
+            font-size: 0.65rem; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--dim);
+        }
+        select, button {
+            background: var(--s); border: 1px solid var(--border);
+            color: var(--cream); padding: 8px 16px;
+            font-family: var(--mono); font-size: 0.75rem;
+            cursor: pointer; transition: 0.12s;
+        }
+        select:hover, button:hover { border-color: var(--accent); }
+        button.primary {
+            background: var(--accent); color: var(--bg); border-color: var(--accent);
+        }
+        button.primary:hover { background: var(--accent2); }
+
+        .output-area {
+            background: var(--s); border: 1px solid var(--border);
+            padding: 20px; margin: 20px 0;
+            white-space: pre-wrap; font-family: var(--serif);
+            font-size: 0.9rem; line-height: 1.8;
+        }
+        .generated-images {
+            display: flex; justify-content: center; gap: 30px; margin: 20px 0;
+        }
+        .generated-images img {
+            width: 120px; height: 120px; object-fit: cover;
+            border: 1px solid var(--border); filter: grayscale(1);
+        }
+        .source-info {
+            text-align: center; margin-top: 10px; font-size: 0.75rem;
+        }
+        .source-info a {
+            color: var(--accent); text-decoration: underline;
+        }
+        footer {
+            margin-top: 60px; border-top: 1px solid var(--border);
+            padding-top: 20px; font-size: 0.7rem; color: var(--dim2);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <nav>
+        <span class="nav-brand"><em>Chceš myš?</em> — demo generátor</span>
+        <div class="nav-links">
+            <a class="nav-link" href="laborator.html">🔮 Laboratoř</a>
+            <a class="nav-link" href="zapisnik.html">📓 Zápisník</a>
+            <a class="nav-link" href="uhlomer.html">📐 Úhloměr</a>
+        </div>
+    </nav>
+
+    <h1 style="font-family:var(--serif); font-weight:300; text-align:center;">🎭 Demo generátor</h1>
+    <p style="text-align:center; color:var(--dim); margin-bottom:30px;">
+        Kombinuj úhly dvou zvířat a vytvoř nový fenomén. Každý klíč pochází z konkrétní pohádky a úhlu.
+    </p>
+
+    <div class="selector-group">
+        <div class="selector" id="selector1">
+            <h3>Zvíře 1</h3>
+            <select id="animal1"></select>
+            <div id="angleList1" class="angle-buttons"></div>
+            <div class="animal-image" id="image1"></div>
+            <div class="source-link" id="sourceLink1"></div>
+        </div>
+        <div class="selector" id="selector2">
+            <h3>Zvíře 2</h3>
+            <select id="animal2"></select>
+            <div id="angleList2" class="angle-buttons"></div>
+            <div class="animal-image" id="image2"></div>
+            <div class="source-link" id="sourceLink2"></div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <div class="ctrl-group">
+            <label>🎭 Doména</label>
+            <select id="domainSelect">
+                <option value="science">🔬 Věda / teorie</option>
+                <option value="film">🎬 Film / scénář</option>
+                <option value="theater">🎭 Divadlo / postavy</option>
+                <option value="visual">🎨 Vizuální umění</option>
+                <option value="choreo">💃 Choreografie</option>
+                <option value="game">🎮 Herní design</option>
+                <option value="performance">✨ Performativní umění</option>
+            </select>
+        </div>
+        <div class="ctrl-group">
+            <label> </label>
+            <button id="generateBtn" class="primary">Generovat</button>
+        </div>
+    </div>
+
+    <div class="generated-images" id="generatedImages"></div>
+    <div class="source-info" id="generatedSources"></div>
+
+    <div class="output-area" id="outputArea">
+        Zde se objeví vygenerovaný výstup.
+    </div>
+
+    <div class="controls">
+        <button id="saveToNotebookBtn">📥 Uložit do zápisníku</button>
+    </div>
+
+    <footer>
+        Demo generátor · Chceš myš? · Kombinuj klíče zvířecích úhlů a vytvářej nové fenomény.
+    </footer>
+</div>
+
+<script>
+    // --------------------------------------------------------------
+    // DATA ZVÍŘAT (pět karet) – klíče a cesty k ilustracím
+    // --------------------------------------------------------------
+    const animalsData = {
+        "Myš": {
+            image: "mys.jpg",
+            page: "mys_uhly.html",
+            keys: {
+                "Absurdní": "archiv ticha místo děje",
+                "Jazykový": "mezery mezi slovy jako dokument",
+                "Ironický": "nejmenší bytost jako svědek všeho",
+                "Filozofický": "skutečnost je to, co uniká výkladu",
+                "Surrealistický": "zvířata nesou poruchy významu",
+                "Kulturní": "anti-pohádka proti očekávání",
+                "Naivní": "jen si všímá",
+                "Introspektivní": "pozornost místo moci",
+                "Groteskní": "svědectví bez soudu",
+                "Analytický": "tichý kronikář",
+                "Asociační": "zadrhnutá věta jako zvuk stopy",
+                "Metaforický": "otázka, která otevírá pasti"
+            }
+        },
+        "Kocour": {
+            image: "kocour.jpg",
+            page: "kocour_uhly.html",
+            keys: {
+                "Absurdní": "trávení interpunkce",
+                "Jazykový": "tečka jako stravitelný znak",
+                "Ironický": "predátor ohrožuje syntax",
+                "Filozofický": "konec věty jako látka",
+                "Surrealistický": "říhání souvětí",
+                "Kulturní": "řeč přerušena autoritou žaludku",
+                "Naivní": "prostě měl hlad",
+                "Introspektivní": "tělo mluví dřív než mysl",
+                "Groteskní": "mlaskání jako editace reality",
+                "Analytický": "nemožnost spolknout smysl",
+                "Asociační": "říhnutí jako jazykový zásah",
+                "Metaforický": "ukončení řeči jako tělesný akt"
+            }
+        },
+        "Ryba": {
+            image: "ryba.jpg",
+            page: "ryba_uhly.html",
+            keys: {
+                "Absurdní": "hudba bez plic",
+                "Jazykový": "rytmus místo slov",
+                "Ironický": "projev slyšitelný jen pod hladinou",
+                "Filozofický": "komunikace, která nepotřebuje porozumění",
+                "Surrealistický": "voda jako notový papír",
+                "Analytický": "mlčení je součást flow",
+                "Groteskní": "ptačí zpěv redukovaný na chaos",
+                "Metaforický": "flow jako vnímání tělem",
+                "Asociační": "rap je čin, ne zvuk",
+                "Introspektivní": "pouze podstata rytmu",
+                "Kulturní": "underground doslova",
+                "Naivní": "prostě to plyne"
+            }
+        },
+        "Zajíc": {
+            image: "zajic.jpg",
+            page: "zajic_uhly.html",
+            keys: {
+                "Absurdní": "přežití jako navigační chyba",
+                "Jazykový": "omyl přeložený jako zázrak",
+                "Ironický": "panika jako strategie",
+                "Filozofický": "pravda je méně stabilní než příběh",
+                "Surrealistický": "oheň čte znamení v srsti",
+                "Kulturní": "mýtus vzniká rychleji než popel",
+                "Naivní": "prostě skočila jinam",
+                "Introspektivní": "spáleniště jako rodný list legendy",
+                "Groteskní": "nehoda korunovaná legendou",
+                "Analytický": "kolektiv potřebuje ikonu víc než fakta",
+                "Metaforický": "praskání ohně jako marketing",
+                "Asociační": "náhoda převlečená za osud"
+            }
+        },
+        "Slon": {
+            image: "slon.jpg",
+            page: "slon_uhly.html",
+            keys: {
+                "Analytický": "motivace skrze nedosažitelnost",
+                "Asociační": "třešeň jako vzpomínka na něco malého",
+                "Kulturní": "mýtus o velkém těle toužícím po lehkosti",
+                "Filozofický": "smysl vzniká z pohybu ne z cíle",
+                "Ironický": "velikost která honí maličkost",
+                "Introspektivní": "běžím pomalu ale poprvé někam",
+                "Jazykový": "slib jako motor věty",
+                "Absurdní": "slon závodí s něčím co možná ani není",
+                "Surrealistický": "krajina si pamatuje slona víc než slon cíl",
+                "Metaforický": "třešeň jako chuť být jiný",
+                "Naivní": "když poběžím dost dlouho určitě ji dostanu",
+                "Groteskní": "těžkopádná honba za lehkostí"
+            }
+        }
+    };
+
+    // Šablony pro generování podle domény
+    const templates = {
+        science: (k1, k2, z1, z2) => `Hypotéza: Kombinace fenoménu „${k1}“ (${z1}) a fenoménu „${k2}“ (${z2}) naznačuje nový vztah mezi těmito perspektivami. Navrhuji výzkum zaměřený na...`,
+        film: (k1, k2, z1, z2) => `Scénář: Otevřená scéna. Postava A ztělesňuje „${k1}“ (${z1}). Postava B ztělesňuje „${k2}“ (${z2}). Konflikt vzniká, když se tyto dva světy střetnou. Námět: ...`,
+        theater: (k1, k2, z1, z2) => `Divadelní postavy: Postava 1: „${k1}“ (${z1}) – jak mluví, jak se pohybuje? Postava 2: „${k2}“ (${z2}) – co je jejím tajným přáním? Monolog jedné z nich: ...`,
+        visual: (k1, k2, z1, z2) => `Vizuální umění: Kombinace „${k1}“ (${z1}) + „${k2}“ (${z2}). Doporučená technika: koláž. Popis barev, tvarů, symbolů: ...`,
+        choreo: (k1, k2, z1, z2) => `Choreografie: Kontrast pohybů vycházejících z „${k1}“ (${z1}) a plynulosti „${k2}“ (${z2}). Popis pohybů, hudba, rytmus.`,
+        game: (k1, k2, z1, z2) => `Herní design: Mechanika: „${k1}“ (${z1}) jako pravidlo. Cíl: „${k2}“ (${z2}) jako podmínka vítězství. Popiš jednoduchou hru pro 2 hráče.`,
+        performance: (k1, k2, z1, z2) => `Performativní umění: Intervence spojující „${k1}“ (${z1}) s „${k2}“ (${z2}). Místo, role účastníků, jak publikum vnímá vznikající význam.`
+    };
+
+    // Stav
+    let selectedAnimal1 = "Myš";
+    let selectedAnimal2 = "Kocour";
+    let selectedAngle1 = "Absurdní";
+    let selectedAngle2 = "Absurdní";
+    let lastGeneratedOutput = "";
+    let currentDomain = "science";
+
+    // DOM elementy
+    const animal1Select = document.getElementById('animal1');
+    const animal2Select = document.getElementById('animal2');
+    const angleList1Div = document.getElementById('angleList1');
+    const angleList2Div = document.getElementById('angleList2');
+    const image1Div = document.getElementById('image1');
+    const image2Div = document.getElementById('image2');
+    const sourceLink1Div = document.getElementById('sourceLink1');
+    const sourceLink2Div = document.getElementById('sourceLink2');
+    const domainSelect = document.getElementById('domainSelect');
+    const generateBtn = document.getElementById('generateBtn');
+    const outputArea = document.getElementById('outputArea');
+    const generatedImagesDiv = document.getElementById('generatedImages');
+    const generatedSourcesDiv = document.getElementById('generatedSources');
+    const saveBtn = document.getElementById('saveToNotebookBtn');
+
+    // Pomocné funkce
+    function populateAnimalSelects() {
+        const animals = Object.keys(animalsData);
+        animals.forEach(animal => {
+            const opt1 = document.createElement('option');
+            opt1.value = animal;
+            opt1.textContent = animal;
+            animal1Select.appendChild(opt1);
+            const opt2 = document.createElement('option');
+            opt2.value = animal;
+            opt2.textContent = animal;
+            animal2Select.appendChild(opt2);
+        });
+        animal1Select.value = selectedAnimal1;
+        animal2Select.value = selectedAnimal2;
+    }
+
+    function renderAngleButtons(animal, containerId, selectedCallback) {
+        const container = document.getElementById(containerId);
+        const keys = animalsData[animal].keys;
+        const angles = Object.keys(keys);
+        container.innerHTML = '';
+        angles.forEach(angle => {
+            const btn = document.createElement('button');
+            btn.className = 'angle-btn';
+            btn.textContent = angle;
+            if ((containerId === 'angleList1' && angle === selectedAngle1) ||
+                (containerId === 'angleList2' && angle === selectedAngle2)) {
+                btn.classList.add('active');
+            }
+            btn.addEventListener('click', () => {
+                selectedCallback(angle);
+                document.querySelectorAll(`#${containerId} .angle-btn`).forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                if (containerId === 'angleList1') selectedAngle1 = angle;
+                else selectedAngle2 = angle;
+                updateSourceLinks();
+            });
+            container.appendChild(btn);
+        });
+    }
+
+    function updateImage(animal, containerId) {
+        const imgPath = `../doma/ilustrace/${animalsData[animal].image}`;
+        const container = document.getElementById(containerId);
+        container.innerHTML = `<img src="${imgPath}" alt="${animal}" onerror="this.style.display='none'">`;
+    }
+
+    function updateSourceLinks() {
+        const animal1 = selectedAnimal1;
+        const angle1 = selectedAngle1;
+        const page1 = animalsData[animal1].page;
+        sourceLink1Div.innerHTML = `<a href="${page1}" target="_blank">📖 Celá pohádka: ${animal1} – ${angle1} →</a>`;
+
+        const animal2 = selectedAnimal2;
+        const angle2 = selectedAngle2;
+        const page2 = animalsData[animal2].page;
+        sourceLink2Div.innerHTML = `<a href="${page2}" target="_blank">📖 Celá pohádka: ${animal2} – ${angle2} →</a>`;
+    }
+
+    function updateBothImages() {
+        updateImage(selectedAnimal1, 'image1');
+        updateImage(selectedAnimal2, 'image2');
+    }
+
+    function renderGeneratedImagesAndSources() {
+        const img1Path = `../doma/ilustrace/${animalsData[selectedAnimal1].image}`;
+        const img2Path = `../doma/ilustrace/${animalsData[selectedAnimal2].image}`;
+        generatedImagesDiv.innerHTML = `
+            <img src="${img1Path}" alt="${selectedAnimal1}">
+            <img src="${img2Path}" alt="${selectedAnimal2}">
+        `;
+        const page1 = animalsData[selectedAnimal1].page;
+        const page2 = animalsData[selectedAnimal2].page;
+        generatedSourcesDiv.innerHTML = `
+            <a href="${page1}" target="_blank">📖 ${selectedAnimal1} – ${selectedAngle1}</a>   |  
+            <a href="${page2}" target="_blank">📖 ${selectedAnimal2} – ${selectedAngle2}</a>
+        `;
+    }
+
+    function generateOutput() {
+        const key1 = animalsData[selectedAnimal1].keys[selectedAngle1];
+        const key2 = animalsData[selectedAnimal2].keys[selectedAngle2];
+        if (!key1 || !key2) {
+            outputArea.innerHTML = 'Nepodařilo se najít klíče pro vybrané úhly.';
+            return;
+        }
+        const template = templates[currentDomain];
+        if (!template) {
+            outputArea.innerHTML = 'Neznámá doména.';
+            return;
+        }
+        const output = template(key1, key2, selectedAnimal1, selectedAnimal2);
+        outputArea.innerHTML = output;
+        lastGeneratedOutput = output;
+        renderGeneratedImagesAndSources();
+    }
+
+    function saveToNotebook() {
+        if (!lastGeneratedOutput) {
+            alert('Nejprve něco vygeneruj.');
+            return;
+        }
+        const domainLabel = domainSelect.options[domainSelect.selectedIndex].text;
+        const entry = {
+            id: 'demo_' + Date.now(),
+            timestamp: Date.now(),
+            content: lastGeneratedOutput,
+            domain: currentDomain,
+            domainLabel: domainLabel,
+            source: 'demo_generator',
+            metadata: {
+                animal1: selectedAnimal1,
+                angle1: selectedAngle1,
+                animal2: selectedAnimal2,
+                angle2: selectedAngle2
+            }
+        };
+        let notebook = JSON.parse(localStorage.getItem('chcesmys_lab_notebook') || '[]');
+        notebook.unshift(entry);
+        localStorage.setItem('chcesmys_lab_notebook', JSON.stringify(notebook));
+        alert('Uloženo do zápisníku (mapa Laboratoř).');
+    }
+
+    // Načtení parametrů z URL (pro propojení z karet)
+    function loadFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const zvir = urlParams.get('zvir');
+        const uhel = urlParams.get('uhel');
+        if (zvir && uhel && animalsData[zvir] && animalsData[zvir].keys[uhel]) {
+            selectedAnimal1 = zvir;
+            selectedAngle1 = uhel;
+            animal1Select.value = selectedAnimal1;
+            renderAngleButtons(selectedAnimal1, 'angleList1', (angle) => { selectedAngle1 = angle; });
+            updateImage(selectedAnimal1, 'image1');
+            updateSourceLinks();
+        }
+    }
+
+    // Eventy
+    animal1Select.addEventListener('change', (e) => {
+        selectedAnimal1 = e.target.value;
+        renderAngleButtons(selectedAnimal1, 'angleList1', (angle) => { selectedAngle1 = angle; });
+        updateImage(selectedAnimal1, 'image1');
+        updateSourceLinks();
+    });
+    animal2Select.addEventListener('change', (e) => {
+        selectedAnimal2 = e.target.value;
+        renderAngleButtons(selectedAnimal2, 'angleList2', (angle) => { selectedAngle2 = angle; });
+        updateImage(selectedAnimal2, 'image2');
+        updateSourceLinks();
+    });
+    domainSelect.addEventListener('change', (e) => {
+        currentDomain = e.target.value;
+    });
+    generateBtn.addEventListener('click', generateOutput);
+    saveBtn.addEventListener('click', saveToNotebook);
+
+    // Inicializace
+    populateAnimalSelects();
+    renderAngleButtons(selectedAnimal1, 'angleList1', (angle) => { selectedAngle1 = angle; });
+    renderAngleButtons(selectedAnimal2, 'angleList2', (angle) => { selectedAngle2 = angle; });
+    updateBothImages();
+    updateSourceLinks();
+    loadFromURL(); // přepíše první výběr pokud jsou parametry
+    // po načtení parametrů aktualizujeme tlačítka a obrázky
+    if (selectedAnimal1) {
+        renderAngleButtons(selectedAnimal1, 'angleList1', (angle) => { selectedAngle1 = angle; });
+        updateImage(selectedAnimal1, 'image1');
+    }
+    if (selectedAnimal2) {
+        renderAngleButtons(selectedAnimal2, 'angleList2', (angle) => { selectedAngle2 = angle; });
+        updateImage(selectedAnimal2, 'image2');
+    }
+    updateSourceLinks();
+</script>
+</body>
+</html>
