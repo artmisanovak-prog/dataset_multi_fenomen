@@ -4,7 +4,11 @@
     "text": "když legenda pokašlává romantika v teráriu rajská zahrada v make-up tutoriálu",
     "type": "kulturně-symbolický blok",
     "function": "zkoumá estetické posuny a hybridní prostředí identity",
-    "fields": ["legenda", "romantika", "zahrada"],
+    "fields": [
+      "legenda",
+      "romantika",
+      "zahrada"
+    ],
     "movement": "mýtus → deformace",
     "intensity": "střední",
     "language": "cs",
@@ -17,7 +21,11 @@
     "text": "já já já vlastně nic modlím se i když nevím k čemu krok za krokem i když nic nepřináší",
     "type": "existenciálně-identitní blok",
     "function": "zkoumá prázdné já a rituál bez víry",
-    "fields": ["já", "modlitba", "kroky"],
+    "fields": [
+      "já",
+      "modlitba",
+      "kroky"
+    ],
     "movement": "sebeobraz → vyprázdnění",
     "intensity": "vysoká",
     "language": "cs",
@@ -30,7 +38,11 @@
     "text": "mýtus o neproveditelné výměně selfie z doby před úsvitem reklama na evoluci ve slevě",
     "type": "mediálně-mytický blok",
     "function": "zkoumá kolaps symbolů a komodifikaci identity",
-    "fields": ["mýtus", "selfie", "evoluce"],
+    "fields": [
+      "mýtus",
+      "selfie",
+      "evoluce"
+    ],
     "movement": "příběh → marketing",
     "intensity": "střední",
     "language": "cs",
@@ -43,7 +55,11 @@
     "text": "bzukot tragédie ježek jako architekt pasti zuby zákona",
     "type": "symbolicko-narativní blok",
     "function": "zkoumá tragédii jako zvuk a zvíře jako konstruktéra moci",
-    "fields": ["tragédie", "ježek", "zákon"],
+    "fields": [
+      "tragédie",
+      "ježek",
+      "zákon"
+    ],
     "movement": "zvuk → past",
     "intensity": "vysoká",
     "language": "cs",
@@ -56,7 +72,11 @@
     "text": "neorientuji se v pravidlech hodnoty které se nedají převést na kusy kritika konzumu identity",
     "type": "kriticko-sociální blok",
     "function": "zkoumá hodnotu mimo trh a identitu mimo pravidla",
-    "fields": ["pravidla", "hodnoty", "konzum"],
+    "fields": [
+      "pravidla",
+      "hodnoty",
+      "konzum"
+    ],
     "movement": "dezorientace → kritika",
     "intensity": "střední",
     "language": "cs",
@@ -69,7 +89,11 @@
     "text": "hypermarket predátorů srovnávací stupeň existence zlo jako vedlejší produkt světla",
     "type": "existenciálně-ekonomický blok",
     "function": "zkoumá vztah mezi trhem, predací a ontologií",
-    "fields": ["predátor", "existence", "zlo"],
+    "fields": [
+      "predátor",
+      "existence",
+      "zlo"
+    ],
     "movement": "stupeň → odhalení",
     "intensity": "vysoká",
     "language": "cs",
@@ -82,7 +106,11 @@
     "text": "třeba to jednou pošlu oheň který nefunguje dívám se na sebe abych si byl jistý že existují",
     "type": "introspektivní blok",
     "function": "zkoumá nefunkční energii a potvrzování vlastní existence",
-    "fields": ["oheň", "existence", "pohled"],
+    "fields": [
+      "oheň",
+      "existence",
+      "pohled"
+    ],
     "movement": "pochybnost → potvrzení",
     "intensity": "střední",
     "language": "cs",
@@ -95,7 +123,11 @@
     "text": "přání přiložené do symbolu radost z katastrofy viditelná nenápadnost",
     "type": "symbolicko-afektivní blok",
     "function": "zkoumá paradox radosti a skrytých významů",
-    "fields": ["přání", "katastrofa", "symbol"],
+    "fields": [
+      "přání",
+      "katastrofa",
+      "symbol"
+    ],
     "movement": "skrytost → odhalení",
     "intensity": "střední",
     "language": "cs",
@@ -108,7 +140,11 @@
     "text": "identita jako sezónní záležitost čísla vycházející z tlamy migrace jako metafora života",
     "type": "identitně-symbolický blok",
     "function": "zkoumá identitu jako cyklus a čísla jako nosiče příběhu",
-    "fields": ["identita", "čísla", "migrace"],
+    "fields": [
+      "identita",
+      "čísla",
+      "migrace"
+    ],
     "movement": "cyklus → přetvoření",
     "intensity": "střední",
     "language": "cs",
@@ -121,7 +157,11 @@
     "text": "humanita v rukou predátora kdo hlídá hlídače když zpíváme nebolí to",
     "type": "eticko-politický blok",
     "function": "zkoumá moc, dohled a anestetizaci reality",
-    "fields": ["humanita", "predátor", "hlídač"],
+    "fields": [
+      "humanita",
+      "predátor",
+      "hlídač"
+    ],
     "movement": "dohled → otupění",
     "intensity": "vysoká",
     "language": "cs",
@@ -129,14 +169,16 @@
     "created": "2026-01-16",
     "source": "Lexikon mezer a hran"
   },
-  
- 
   {
     "id": "1.11-01-2026",
     "text": "zvyk pokračovat i když je konec underground doslova romantika pro rozdílné váhové kategorie",
     "type": "existenciálně-sociální blok",
     "function": "zkoumá setrvačnost, skryté vrstvy a asymetrické vztahy",
-    "fields": ["zvyk", "underground", "romantika"],
+    "fields": [
+      "zvyk",
+      "underground",
+      "romantika"
+    ],
     "movement": "setrvačnost → odhalení",
     "intensity": "střední",
     "language": "cs",
@@ -149,7 +191,11 @@
     "text": "imperativ samocenzury emoce bez kalorií noční tvář já",
     "type": "psychologicko-identitní blok",
     "function": "zkoumá tlak na sebeúpravu a vyprázdněné emoce",
-    "fields": ["samocenzura", "emoce", "já"],
+    "fields": [
+      "samocenzura",
+      "emoce",
+      "já"
+    ],
     "movement": "potlačení → vyprázdnění",
     "intensity": "vysoká",
     "language": "cs",
@@ -162,7 +208,11 @@
     "text": "slova pohledy pohyby tančí vzduchem a ztrácí význam zájmena na výměnu matka z nikotinu a kočičích očí",
     "type": "jazykově-performační blok",
     "function": "zkoumá rozpad komunikace a proměnlivost rolí",
-    "fields": ["slova", "pohyb", "zájmena"],
+    "fields": [
+      "slova",
+      "pohyb",
+      "zájmena"
+    ],
     "movement": "tanec → rozpad",
     "intensity": "vysoká",
     "language": "cs",
@@ -175,7 +225,11 @@
     "text": "křídla co kreslí paměť do vzduchu slovo má cenu až po zranění směr bez přemýšlení",
     "type": "symbolicko-temporální blok",
     "function": "zkoumá paměť jako stopu a jazyk jako reakci na bolest",
-    "fields": ["křídla", "paměť", "slovo"],
+    "fields": [
+      "křídla",
+      "paměť",
+      "slovo"
+    ],
     "movement": "stopa → zranění",
     "intensity": "střední",
     "language": "cs",
@@ -188,7 +242,11 @@
     "text": "přání být klidná i s hnízdem v účesu je to fér hluk který brání přemýšlení i ticho",
     "type": "afektivně-existenciální blok",
     "function": "zkoumá touhu po klidu v prostředí zahlceném hlukem",
-    "fields": ["přání", "hluk", "ticho"],
+    "fields": [
+      "přání",
+      "hluk",
+      "ticho"
+    ],
     "movement": "napětí → klid",
     "intensity": "střední",
     "language": "cs",
@@ -201,7 +259,11 @@
     "text": "emoční verzatilita na hraně rozpuštění vlny jako jizvy hlava obchází sama sebe a voda teče vzhůru",
     "type": "psychicko-symbolický blok",
     "function": "zkoumá nestabilitu emocí a paradoxní pohyb",
-    "fields": ["emoce", "vlny", "hlava"],
+    "fields": [
+      "emoce",
+      "vlny",
+      "hlava"
+    ],
     "movement": "hranice → rozpuštění",
     "intensity": "vysoká",
     "language": "cs",
@@ -214,7 +276,11 @@
     "text": "touha po změně skrz náraz kdo sází kdo je sázka král bez povinností",
     "type": "existenciálně-herní blok",
     "function": "zkoumá riziko, náraz a moc bez odpovědnosti",
-    "fields": ["touha", "sázka", "král"],
+    "fields": [
+      "touha",
+      "sázka",
+      "král"
+    ],
     "movement": "náraz → nejistota",
     "intensity": "střední",
     "language": "cs",
@@ -227,7 +293,11 @@
     "text": "pták co hledá význam v prázdnu smíření jako styl nositel času",
     "type": "symbolicko-existenciální blok",
     "function": "zkoumá hledání významu a přijetí jako estetiku",
-    "fields": ["pták", "prázdno", "čas"],
+    "fields": [
+      "pták",
+      "prázdno",
+      "čas"
+    ],
     "movement": "hledání → smíření",
     "intensity": "nízká",
     "language": "cs",
@@ -240,7 +310,11 @@
     "text": "barvy které neexistují ale štěkají pauza která se odmítá stát pokračováním nabídka která mate měřítka",
     "type": "percepčně-paradoxní blok",
     "function": "zkoumá smyslové paradoxy a narušené měřítko reality",
-    "fields": ["barvy", "pauza", "nabídka"],
+    "fields": [
+      "barvy",
+      "pauza",
+      "nabídka"
+    ],
     "movement": "iluze → zmatek",
     "intensity": "vysoká",
     "language": "cs",
@@ -253,11 +327,16 @@
     "text": "zmražený okamžik romantika ztracených významů kolektivní monolog",
     "type": "temporálně-kolektivní blok",
     "function": "zkoumá zastavený čas a sdílené ticho významů",
-    "fields": ["okamžik", "romantika", "kolektiv"],
+    "fields": [
+      "okamžik",
+      "romantika",
+      "kolektiv"
+    ],
     "movement": "zastavení → ozvěna",
     "intensity": "střední",
     "language": "cs",
     "version": "1.0",
     "created": "2026-01-16",
     "source": "Lexikon mezer a hran"
-  },
+  }
+]
